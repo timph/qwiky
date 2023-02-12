@@ -60,7 +60,7 @@ export default component$(() => {
         {list.value.map((item) => (
           <li>
             {item.text}{' '}
-            <a href='#' preventdefault:click onClick$={() => remove.run({text: 'not match'})}>[X]</a>
+            <a href='#' preventdefault:click onClick$={() => remove.run(item)}>[X]</a>
             {remove.fail?.fieldErrors.name && <div>{remove.fail.message}</div>}
           </li>
         ))}
