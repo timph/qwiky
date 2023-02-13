@@ -1,71 +1,32 @@
-import { component$ } from '@builder.io/qwik';
-import { loader$, action$, zod$, z, Form, useStore } from '@builder.io/qwik-city';
+import { component$, $, useStore } from '@builder.io/qwik';
 import type { DocumentHead } from '@builder.io/qwik-city';
+import { loader$, Form } from '@builder.io/qwik-city';
+import { getList, addToListAction } from '../../state/todoState';
+import ShowList from './ShowList';
 
-interface ListItem {
-  text: string;
-}
-
-export const list: ListItem[] = [];
-
-export const listLoader = loader$(() => {
-  return list;
-});
-
-export const addToListAction = action$(
-  (item, { fail }) => {
-    try {
-      list.push(item);
-    }
-    catch(e) {
-      return fail(500, {
-        message: 'Cannot add item',
-      });
-    }
-    return {
-      success: true,
-    };
-  },
-  zod$( // validation schema of input
-  {
-    text: z.string(),
-  })
-);
-
-export const removeFromListAction = action$(
-  (item, { fail }) => {
-    const idx = list.findIndex(li => li.text === item.text);
-
-    if (idx < 0) {
-      return fail(404, {
-        message: `Cannot find item to remove - idx ${idx} - text ${item.text}`,
-      });
-    }
-    list.splice(idx, 1);
-    return {
-      success: true,
-    };
-  }
-);
+// loader$ can only be used on index of page
+export const listLoader = loader$(getList);
 
 export default component$(() => {
   const list = listLoader.use();
   const add = addToListAction.use();
-  const remove = removeFromListAction.use();
+
+  const localStore = useStore({
+    itemCount: 0
+  })
+  // 
+  const reduceCount$ = $(() => localStore.itemCount--);
+  const addCount$ = $(() => localStore.itemCount++);
 
   return (
     <>
       <h1>Form Action TODO list</h1>
-      <ul>
-        {list.value.map((item) => (
-          <li>
-            {item.text}{' '}
-            <a href='#' preventdefault:click onClick$={() => remove.run(item)}>[X]</a>
-            {remove.fail?.fieldErrors.name && <div>{remove.fail.message}</div>}
-          </li>
-        ))}
-      </ul>
-      <Form action={add} spaReset>
+      
+      <ShowList list={list} reduceCount={reduceCount$} />
+      Number of Items: {localStore.itemCount}
+      <hr />
+      
+      <Form action={add} onSubmitCompleted$={addCount$} spaReset>
         <input type="text" name="text" required />
         <br/><br/>
         <button type="submit">Add item</button>
