@@ -21,7 +21,7 @@ export default component$(() => {
       </main>
       <footer>
         <a href="https://www.builder.io/" target="_blank">
-          Made with ♡ by Builder.io
+          Made with ❤️ by Builder.io
           <div>{serverTime.value.date}</div>
         </a>
       </footer>

@@ -8,24 +8,29 @@ export default component$(() => {
   return (
     <header>
       <div class="logo">
-        <a href="https://qwik.builder.io/" target="_blank" title="qwik">
+        <a href="/" title="qwik">
           <QwikLogo />
         </a>
       </div>
       <ul>
         <li>
+          <a href="/">
+          Samples
+          </a>
+        </li>
+        <li>
           <a href="https://qwik.builder.io/docs/components/overview/" target="_blank">
-            Docs
+          Qwik-Docs
           </a>
         </li>
         <li>
           <a href="https://qwik.builder.io/examples/introduction/hello-world/" target="_blank">
-            Examples
+            Qwik-Examples
           </a>
         </li>
         <li>
           <a href="https://qwik.builder.io/tutorial/welcome/overview/" target="_blank">
-            Tutorials
+          Qwik-Tutorials
           </a>
         </li>
       </ul>

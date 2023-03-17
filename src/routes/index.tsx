@@ -1,13 +1,26 @@
-import { component$ } from '@builder.io/qwik';
+import { component$, useContext } from '@builder.io/qwik';
 import type { DocumentHead } from '@builder.io/qwik-city';
 import { Link } from '@builder.io/qwik-city';
+import { USER_CTX } from '~/state/userProfile';
 
 export default component$(() => {
+  const context = useContext(USER_CTX);
+  
   return (
     <div>
-      <h1>
-        Welcome to Qwik <span class="lightning">⚡️</span>
-      </h1>
+      <h1>Welcome {context.name} - Try some samples<span class="lightning">⚡️</span></h1>
+      <Link class="playfetch" href="/fetch/">
+        Play Fetch 🐕
+      </Link>
+      <Link class="mindblow" href="/flower/">
+        Blow my mind 🤯
+      </Link>
+      <Link class="todolist" href="/todolist/">
+        TODO demo 📝
+      </Link> 
+      <pre>Your last action is {context.lastAction} </pre>
+
+      <h1>Welcome to Qwik <span class="lightning">⚡️</span></h1>
 
       <ul>
         <li>
@@ -128,12 +141,6 @@ export default component$(() => {
           </a>
         </li>
       </ul>
-      <Link class="mindblow" href="/flower/">
-        Blow my mind 🤯
-      </Link>
-      <Link class="todolist" href="/todolist/">
-        TODO demo 📝
-      </Link>
     </div>
   );
 });
