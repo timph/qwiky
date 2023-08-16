@@ -1,5 +1,19 @@
 # Qwik City App ⚡️
 
+Start with ```yarn && yarn dev``` then you can open the page in default browser by hit `o` (letter o) key.
+
+Try one of the new sample run:
+- Play Fetch 🐕 (API fetch call)
+- Blow my mind 🤯 (css rendering with state control)
+- TODO demo 📝 (global state and local state management)
+
+
+
+![Screenshot 2023-08-16 at 5 53 51 PM](https://github.com/timph/qwiky/assets/1979607/ee065cba-ffda-4255-9f1a-aee710dba85f)
+
+
+## Reference Docs
+
 - [Qwik Docs](https://qwik.builder.io/)
 - [Discord](https://qwik.builder.io/chat)
 - [Qwik GitHub](https://github.com/BuilderIO/qwik)
